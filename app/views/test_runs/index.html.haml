@@ -1,0 +1,4 @@
+%ul
+  - test_runs.each do |test_run|
+    %li= link_to "#{test_run.project_name} - #{test_run.ran_at}", test_run
+      
