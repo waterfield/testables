@@ -4,6 +4,9 @@ ruby         '1.9.3'
 gem 'rails', '3.2.3'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
+gem 'mongoid'
+gem 'devise'
+# gem 'bson_ext'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
