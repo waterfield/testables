@@ -1,3 +1,28 @@
-%h1= test_run.project_name
+.row
+  - if test_run.passed?
+    .alert.alert-success
+      %h4.alert-heading
+        Your test passed!
+        %i.icon.icon-thumbs-up
+      You must be pretty awesome.
+  - else
+    .alert.alert-error
+      %h4.alert-heading
+        Your test failed
+        %i.icon.icon-thumbs-down
+      That means you still have a job!
+      
 
-%pre= test_run.raw_output
+.row-fluid
+  .span6
+    %h2= test_run.project_name
+    %dl.dl-horizontal
+      %dt Ran At
+      %dd= test_run.ran_at
+
+      %dt Passed
+      %dd= test_run.passed
+
+  .span6
+    %h2 Raw Output
+    %pre= test_run.raw_output
