@@ -16,4 +16,8 @@ gem 'uglifier',     '>= 1.0.3'
 gem 'haml-rails'
 gem 'less'
 
+group :test do
+  gem 'rspec-rails'
+end
+
 gem 'jquery-rails'

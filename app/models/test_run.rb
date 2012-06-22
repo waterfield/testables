@@ -10,4 +10,8 @@ class TestRun
   # attr_protected :ran_at, :passed, :project_name, :raw_output
   index :project_name
   index :ran_at
+  
+  def dummy
+    'dummy'
+  end
 end
