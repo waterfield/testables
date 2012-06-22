@@ -1,5 +1,5 @@
 class Runner < Struct.new(:task)
-  attr_accessor :status, :output
+  attr_accessor :passed, :raw_output
   
   def execute
     clone_repo
@@ -8,6 +8,10 @@ class Runner < Struct.new(:task)
     Dir.chdir path
     run_test
     Dir.chdir pwd
+  end
+  
+  def result
+    {passed: passed, raw_output: raw_output}
   end
   
   def clone_command path

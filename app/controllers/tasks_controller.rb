@@ -11,4 +11,9 @@ class TasksController < ApplicationController
       url: "git@github.com:waterfield/testables.git"
     )
   end
+  
+  def done
+    TestRun.create! params
+    render json: {status: 'OK'}
+  end
 end

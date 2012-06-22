@@ -5,8 +5,8 @@ class RspecRunner < Runner
   def run_test
     `#{prep_command}`
     # TODO: check if that failed...
-    self.output = `#{test_command}` if $?.success?
-    self.status = $?.success?
+    self.raw_output = `#{test_command}` if $?.success?
+    self.passed = $?.success?
   end
   
   def prep_command

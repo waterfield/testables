@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe TasksController do
   
+  let(:task) {{ type: 'rspec', url: 'git@github.com:foo/bar.git' }}
+  
   specify do
     {get: '/tasks'}.should route_to(
       controller: 'tasks',
@@ -25,5 +27,21 @@ describe TasksController do
   context 'when requesting the wrong content type' do
     before { get :index }
     specify { response.code.should == '406' }
+  end
+  
+  context 'when updating status of a task' do
+    before do
+      post :done,
+        format: 'json',
+        task: task,
+        success: true,
+        output: 'Success!'
+    end
+    specify do
+      TestRun.where(
+        passed: true,
+        raw_output: 'Success!'
+      ).count.should == 1
+    end
   end
 end

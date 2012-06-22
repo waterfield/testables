@@ -9,8 +9,7 @@ namespace :task do
     task = JSON.parse(raw).with_indifferent_access
     runner = Runner.build task
     runner.execute
-    puts runner.status
-    puts runner.output
+    HTTParty.post 'http://testables.dev/tasks/done', runner.result
     # send result to server
   end
 end
