@@ -20,4 +20,8 @@ group :test do
   gem 'rspec-rails'
 end
 
+group :client do
+  gem 'httparty'
+end
+
 gem 'jquery-rails'
