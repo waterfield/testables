@@ -11,7 +11,7 @@ class Runner < Struct.new(:task)
   end
   
   def result
-    {passed: passed, raw_output: raw_output}
+    {passed: passed, raw_output: raw_output, project_name: 'Dummy Test'}
   end
   
   def clone_command path
