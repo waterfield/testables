@@ -3,9 +3,8 @@ require 'runner'
 class RspecRunner < Runner
   
   def run_test
-    `#{prep_command}`
-    # TODO: check if that failed...
-    self.raw_output = `#{test_command}` if $?.success?
+    raw_output << `#{prep_command}`
+    raw_output << `#{test_command}` if $?.success?
     self.passed = $?.success?
   end
   

@@ -40,7 +40,7 @@ private
 
   def clone_repo
     `rm -rf #{path}`
-    `#{clone_command path}`
+    self.raw_output = `#{clone_command path}`
   end
   
 end
