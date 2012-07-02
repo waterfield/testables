@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TasksController do
-  
-  let(:task) {{ type: 'rspec', url: 'git@github.com:foo/bar.git' }}
+
+  let(:task) {{ type: 'rspec', url: 'git@github.com:foo/bar.git', run_at: DateTime.now }}
   let(:date) { date ||= DateTime.now.to_s }
   
   specify do
