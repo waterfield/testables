@@ -3,6 +3,7 @@ require 'spec_helper'
 describe TasksController do
   
   let(:task) {{ type: 'rspec', url: 'git@github.com:foo/bar.git' }}
+  let(:date) { date ||= DateTime.now.to_s }
   
   specify do
     {get: '/tasks'}.should route_to(
@@ -35,13 +36,18 @@ describe TasksController do
         format: 'json',
         task: task,
         success: true,
-        output: 'Success!'
+        passed: true,        
+        raw_output: 'Success!',
+        ran_at: date
     end
     specify do
-      TestRun.where(
+      tr = TestRun.where(
         passed: true,
-        raw_output: 'Success!'
-      ).count.should == 1
+        raw_output: "Success!"
+      )
+      #.count.should == 1
+      tr.count.should >= 1
+      tr.last.ran_at.should == date
     end
   end
 end

@@ -2,7 +2,7 @@ require 'httparty'
 require 'runner'
 require 'rspec_runner'
 
-host = 'testabl.es'
+host = 'testables.dev'
 
 namespace :task do  
   desc "Runs a single task from the server"
