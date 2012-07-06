@@ -1,4 +1,5 @@
 Testables::Application.routes.draw do
+  match "/login" => "login#index"
   resources :test_runs
   resources :tasks do
     post :done, :on => :collection
