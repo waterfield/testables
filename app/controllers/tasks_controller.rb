@@ -1,19 +1,33 @@
 class TasksController < ApplicationController
   respond_to :json
+  expose(:tasks) {Task.scoped}
+  expose :task
+  before_filter :parse_task_param, only: :update
   
   def index
-    # params[:test_types] # indicates what tests the client supports
-    # task = Task.unstarted.where(type: params[:test_types])
-    # task.start! params[:api_key]
-    # respond_with task
-    respond_with(
-      type: 'rspec',
-      url: "git@github.com:waterfield/testables.git"
-    )
+    respond_with tasks
   end
   
-  def done
-    TestRun.create! params
-    render json: {status: 'OK'}
+  def pop
+    task = tasks.unstarted.first
+    if task.present?
+      respond_with task
+    else
+      respond_with nil, status: :not_found
+    end
+  end
+  
+  def update
+    if task.save
+      respond_with task
+    else
+      respond_with task.errors, :status => :unprocessable_entity
+    end
+  end
+  
+  private
+  
+  def parse_task_param
+    params[:task] = JSON.parse(params[:task])
   end
 end

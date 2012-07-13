@@ -18,6 +18,8 @@ gem 'less'
 
 group :test do
   gem 'rspec-rails'
+  gem 'mongoid-rspec'
+  gem 'database_cleaner'
 end
 
 group :client do
