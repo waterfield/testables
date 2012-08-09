@@ -177,7 +177,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
-  bundler (= 1.2.0.pre)
+  bundler (= 1.2.0.rc)
   coffee-rails (~> 3.2.1)
   database_cleaner
   decent_exposure
@@ -187,6 +187,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   less
+  libv8
   mongoid
   mongoid-rspec
   rails (= 3.2.3)

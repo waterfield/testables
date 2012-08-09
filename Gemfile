@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #ruby         '1.9.3'
-gem 'bundler', '1.2.0.pre'
+gem 'bundler', '1.2.0.rc'
 gem 'rails', '3.2.3'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
@@ -17,6 +17,7 @@ gem 'uglifier',     '>= 1.0.3'
 gem 'haml-rails'
 gem 'less'
 gem 'therubyracer'
+gem 'libv8'
 
 group :test do
   gem 'rspec-rails'
