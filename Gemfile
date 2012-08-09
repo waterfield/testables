@@ -23,7 +23,12 @@ group :test do
   gem 'database_cleaner'
 end
 
-group :client do
+# NOTE: We're using 'development' here, rather than the more
+# appropriate 'client', because Heroku's Cedar stack doesn't
+# support the BUNDLE_WITHOUT configuration, and instead always
+# uses `--without development:test`. And httparty seems to
+# break heroku.
+group :development do
   gem 'httparty'
 end
 
