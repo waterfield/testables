@@ -2,7 +2,7 @@ class PushesController < ApplicationController
   respond_to :json, only: 'create'
 
   def create
-    push = Push.new params[:payload]
+    push = Push.new JSON.parse(params[:payload])
     if push.save
       respond_with push, status: :created
     else
