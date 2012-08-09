@@ -177,6 +177,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  bundler (= 1.2.0.pre)
   coffee-rails (~> 3.2.1)
   database_cleaner
   decent_exposure
