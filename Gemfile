@@ -16,17 +16,15 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier',     '>= 1.0.3'
 gem 'haml-rails'
 gem 'less'
-# gem 'therubyracer'
-# gem 'libv8'
 
-# group :test do
-#   gem 'rspec-rails'
-#   gem 'mongoid-rspec'
-#   gem 'database_cleaner'
-# end
+group :test do
+  gem 'rspec-rails'
+  gem 'mongoid-rspec'
+  gem 'database_cleaner'
+end
 
-# group :client do
-#   gem 'httparty'
-# end
+group :client do
+  gem 'httparty'
+end
 
-# gem 'jquery-rails'
+gem 'jquery-rails'
