@@ -1,5 +1,6 @@
 Testables::Application.routes.draw do
   resources :test_runs
+  resources :projects
   resources :tasks do
     get :pop, :on => :collection
   end
