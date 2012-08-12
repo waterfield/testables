@@ -1,19 +1,24 @@
 if %(development test).include?(Rails.env)
-  require 'httparty'
-  require 'runner'
-  require 'rspec_runner'
 
-  host = 'testables.dev'
+  # Require the :client group from the Gemfile
+  Bundler.require :client
+
+  # Set up +Her+ with the default middleware, and point it
+  # at `http://testables.dev`.
+  Her::API.setup :url => "http://testables.dev" do |faraday|
+    faraday.request :url_encoded
+    faraday.use Her::Middleware::DefaultParseJSON
+    faraday.adapter Faraday.default_adapter
+  end
+
+  require 'client/worker'
 
   namespace :task do
-    desc "Runs a single task from the server"
+
+    desc "Start worker process that runs tasks as available"
     task :run => :environment do
-      raw = HTTParty.get("http://#{host}/tasks.json").body
-      task = JSON.parse(raw).with_indifferent_access
-      runner = Runner.build task
-      runner.execute
-      HTTParty.post "http://#{host}/tasks/done", body: runner.result
-      # send result to server
+      Client::Worker.new.run
     end
+
   end
 end

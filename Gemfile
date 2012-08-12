@@ -32,7 +32,7 @@ group local(:test) do
 end
 
 group local(:client) do
-  gem 'httparty'
+  gem 'her'
 end
 
 gem 'jquery-rails'

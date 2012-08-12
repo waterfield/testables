@@ -4,6 +4,7 @@ Testables::Application.routes.draw do
   resources :pushes
   resources :tasks do
     get :pop, :on => :collection
+    post :claim, :on => :collection
   end
   root to: 'test_runs#index'
 end
