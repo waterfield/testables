@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   respond_to :json
 
   before_filter :parse_task_param, only: :update
-  expose(:tasks) {Task.scoped}
+  expose(:tasks) { Task.scoped }
   expose :task
 
   def index
