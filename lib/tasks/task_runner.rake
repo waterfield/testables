@@ -4,10 +4,17 @@ if %(development test).include?(Rails.env)
   Bundler.require :client
 
   # Point to local host in development mode,
-  # or heroku otherwise.
-  url = Rails.env.development? ?
-    "http://testables.dev" :
+  # or heroku otherwise. You can override the URL
+  # by specifying it on the command line:
+  #
+  #     rake task:run URL=http://the.interne.ts/
+  url = if ENV['URL'].present?
+    ENV['URL']
+  elsif Rails.env.development?
+    "http://testables.dev"
+  else
     "http://testabl.es"
+  end
 
   # Set up +Her+ with the default middleware, and point it
   # at `http://testables.dev`.

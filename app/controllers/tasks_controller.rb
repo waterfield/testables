@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-
   respond_to :json
 
   before_filter :parse_task_param, only: :update
