@@ -16,3 +16,4 @@
 
 # Ignore local .rvmrc
 .rvmrc
+*.swp
