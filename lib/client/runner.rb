@@ -12,7 +12,10 @@ module Client
     # Subclasses can refine this result with their own
     # result keys.
     def result
-      { raw_output: raw_output }
+      {
+        raw_output: raw_output,
+        ran_at: Time.now
+      }
     end
 
     # This method should be provided by implementers

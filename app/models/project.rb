@@ -1,5 +1,8 @@
 class Project
   include Mongoid::Document
+
+  has_many :tasks
+
   field :name, type: String
   field :repository, type: String
 
@@ -17,6 +20,6 @@ class Project
   end
 
   def test!
-    Task.enqueue task
+    tasks.enqueue self, task
   end
 end

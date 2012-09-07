@@ -1,10 +1,35 @@
 class Task
   include Mongoid::Document
-  scope :unstarted, where(status: "unstarted")
 
-  field :status, :type => String
+  belongs_to :project
+
   field :contents, :type => Hash
   field :result, :type => Hash
+
+  state_machine :initial => :queued do
+    event :claim do
+      transition :queued => :claimed
+    end
+
+    event :finish do
+      transition any => :finished
+    end
+
+    event :time_out do
+      transition :claimed => :queued
+    end
+
+    after_transition :on => :finish, :do => :record_result
+  end
+
+  def record_result
+    TestRun.create!(
+      ran_at: result['ran_at'],
+      passed: result['passed'],
+      project_name: project.name,
+      raw_output: result['raw_output']
+    )
+  end
 
   class << self
 
@@ -17,8 +42,9 @@ class Task
       end
     end
 
-    def enqueue contents
-      Task.create!(
+    def enqueue project, contents
+      create!(
+        project: project,
         status: 'unstarted',
         contents: contents
       )
