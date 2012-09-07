@@ -72,7 +72,6 @@ GEM
       rest-client (~> 1.6.1)
       rubyzip
     hike (1.2.1)
-    http_logger (0.2.2)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -188,7 +187,6 @@ DEPENDENCIES
   haml-rails
   her
   heroku
-  http_logger
   jquery-rails
   less
   mongoid
