@@ -4,8 +4,7 @@ class Project
   field :name, type: String
   field :repository, type: String
 
-  has_many :tasks
-  has_many :test_runs
+  has_many :suites
 
   class << self
     def notify repository
@@ -14,11 +13,10 @@ class Project
   end
 
   def task
-    { 'url' => "git@github.com:#{repository}.git",
-      'type' => 'rspec' }
+    { 'url' => "git@github.com:#{repository}.git" }
   end
 
   def test!
-    tasks.create! contents: task
+    suites.each &:test!
   end
 end

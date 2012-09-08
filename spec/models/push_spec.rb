@@ -11,7 +11,8 @@ describe Push do
   context 'when created for a matching project' do
 
     before do
-      Project.create! repository: 'owner/repo'
+      project = Project.create! repository: 'owner/repo'
+      project.suites.create! name: 'rspec'
       Push.create! repository: {
         'name' => 'repo',
         'owner' => {'name' => 'owner'}}

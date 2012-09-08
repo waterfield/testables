@@ -4,7 +4,7 @@ class Task
   include Mongoid::Document
   include ScopeMachine
 
-  belongs_to :project
+  belongs_to :suite
 
   field :contents, :type => Hash
   field :result, :type => Hash
@@ -24,11 +24,8 @@ class Task
 
   # When the task is finished, create a TestRun to
   # record the result.
-  #
-  # TODO: refactor this to do different things based
-  # on the task contents.
   def record_result
-    project.test_runs.create! result if project
+    suite.finish self if suite
   end
 
   class << self
