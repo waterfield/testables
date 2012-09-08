@@ -17,14 +17,16 @@ gem 'bson_ext'
 gem 'decent_exposure'
 gem 'state_machine'
 
-# Heroku doesn't like the :assets group
-# group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier',     '>= 1.0.3'
-  gem 'haml-rails'
-  gem 'less'
-# end
+# Assets
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier',     '>= 1.0.3'
+gem 'haml-rails'
+gem 'less'
+
+group local(:development) do
+  gem 'apipie-rails'
+end
 
 group local(:test) do
   gem 'rspec-rails'
