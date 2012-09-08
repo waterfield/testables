@@ -1,17 +1,37 @@
-require 'httparty'
-require 'runner'
-require 'rspec_runner'
+if %(development test).include?(Rails.env)
 
-host = 'testables.dev'
+  # Require the :client group from the Gemfile
+  Bundler.require :client
 
-namespace :task do  
-  desc "Runs a single task from the server"
-  task :run => :environment do
-    raw = HTTParty.get("http://#{host}/tasks.json").body
-    task = JSON.parse(raw).with_indifferent_access
-    runner = Runner.build task
-    runner.execute
-    HTTParty.post "http://#{host}/tasks/done", body: runner.result
-    # send result to server
+  # Point to local host in development mode,
+  # or heroku otherwise. You can override the URL
+  # by specifying it on the command line:
+  #
+  #     rake task:run URL=http://the.interne.ts/
+  url = if ENV['URL'].present?
+    ENV['URL']
+  elsif Rails.env.development?
+    "http://testables.dev"
+  else
+    "http://testabl.es"
+  end
+
+  # Set up +Her+ with the default middleware, and point it
+  # at `http://testables.dev`.
+  Her::API.setup :url => url do |faraday|
+    faraday.request :url_encoded
+    faraday.use Her::Middleware::DefaultParseJSON
+    faraday.adapter Faraday.default_adapter
+  end
+
+  require 'client/worker'
+
+  namespace :task do
+
+    desc "Start worker process that runs tasks as available"
+    task :run => :environment do
+      Client::Worker.new.run
+    end
+
   end
 end

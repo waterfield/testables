@@ -25,8 +25,7 @@
           = link_to 'Testables', root_path, class: 'brand'
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Test Runs", test_runs_path
-              %li= link_to "Login", login_path
+              = render 'shared/nav_links'
 
     .container
 
@@ -39,9 +38,9 @@
               %h3 Sidebar
               %ul.nav.nav-list
                 %li.nav-header Sidebar
-                %li= link_to "Test Runs", test_runs_path
+                = render 'shared/nav_links'
 
-    
+
       %footer
         %p &copy; Waterfield 2012
     /
