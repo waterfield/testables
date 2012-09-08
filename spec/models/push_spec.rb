@@ -18,10 +18,10 @@ describe Push do
     end
 
     it 'should create a task' do
-      Task.count == 1
+      Task.count.should == 1
       task = Task.first
-      task.status.should == 'unstarted'
-      task.contents == {
+      task.state.should == 'queued'
+      task.contents.should == {
         'url' => 'git@github.com:owner/repo.git',
         'type' => 'rspec'
       }

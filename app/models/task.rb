@@ -28,7 +28,7 @@ class Task
   # TODO: refactor this to do different things based
   # on the task contents.
   def record_result
-    project.test_runs.create! result
+    project.test_runs.create! result if project
   end
 
   class << self

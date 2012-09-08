@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe PushesController do
-  let(:payload) {File.read(Rails.root.join("spec", "fixtures", "payload.json"))}
+
+  let(:payload) { File.read(Rails.root.join("spec", "fixtures", "payload.json")) }
 
   it 'should route to create action' do
-    {post: "/pushes"}.should route_to(controller: "pushes", action: "create")
+    { post: '/pushes' }.should route_to(
+      controller: 'pushes',
+      action: 'create' )
   end
 
   context 'when pushing commits from github' do
