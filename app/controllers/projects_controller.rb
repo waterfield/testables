@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  expose(:projects) {Project.scoped}
+  expose(:projects) { Project.scoped }
   expose :project
 
   def create

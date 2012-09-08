@@ -8,5 +8,5 @@ class TestRun
 
   index :ran_at
 
-  belongs_to :project
+  belongs_to :suite
 end

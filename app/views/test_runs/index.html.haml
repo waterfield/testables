@@ -1,7 +1,12 @@
 %ul
   - test_runs.each do |test_run|
     %li
-      = link_to "#{test_run.project.name} - #{test_run.ran_at}", test_run
+      - suite = test_run.suite
+      - project = suite.project
+      - time = time_ago_in_words test_run.ran_at
+
+      = link_to "#{project.name}: #{suite.name} (#{time} ago)", test_run
+
       %span.label{class: "label-#{label_color(test_run)}"}
         - if test_run.passed?
           Passed

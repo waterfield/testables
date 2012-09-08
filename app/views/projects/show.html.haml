@@ -1,3 +1,11 @@
 .project
-  .name= project.name
-  .repo= project.repository
+  %dl.dl-horizontal
+    %dt Name
+    %dd= project.name
+    %dt Repository
+    %dd= project.repository
+
+  = link_to "New Suite", new_project_suite_path(project)
+  %ul
+    - project.suites.each do |suite|
+      %li= link_to suite.name, project_suite_path(project, suite)

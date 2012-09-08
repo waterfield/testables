@@ -15,7 +15,10 @@
 
 .row-fluid
   .span6
-    %h2= test_run.project.name
+    - suite = test_run.suite
+    - project = suite.project
+
+    %h2 #{project.name}: #{suite.name}
     %dl.dl-horizontal
       %dt Ran At
       %dd= test_run.ran_at
