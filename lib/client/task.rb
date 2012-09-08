@@ -21,7 +21,6 @@ module Client
     def handle
       runner = Runner.build(contents)
       runner.run
-      self.status = 'finished'
       self.result = runner.result
       save
     end

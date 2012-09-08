@@ -1,10 +1,11 @@
 class Project
   include Mongoid::Document
 
-  has_many :tasks
-
   field :name, type: String
   field :repository, type: String
+
+  has_many :tasks
+  has_many :test_runs
 
   class << self
     def notify repository
@@ -13,13 +14,11 @@ class Project
   end
 
   def task
-    {
-      'url' => "git@github.com:#{repository}.git",
-      'type' => 'rspec'
-    }
+    { 'url' => "git@github.com:#{repository}.git",
+      'type' => 'rspec' }
   end
 
   def test!
-    tasks.enqueue self, task
+    tasks.create! contents: task
   end
 end
