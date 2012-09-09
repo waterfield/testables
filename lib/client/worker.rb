@@ -15,7 +15,8 @@ module Client
 
     # This function never terminates.
     def run
-      while true
+      trap_signals
+      until @stop
         if task = next_task
           notify { task.handle }
         else
@@ -25,6 +26,20 @@ module Client
     end
 
   private
+
+    # Intercept SIGINT (Ctrl-C) and attempt to shut down gracefully.
+    # If the user hits Ctrl-C again, stop immediately.
+    def trap_signals
+      Signal.trap 'INT' do
+        if @stop
+          puts "Aborting!"
+          Process.exit false
+        else
+          puts "Shutting down gracefully. Press Ctrl-C again to stop immediately."
+          @stop = true
+        end
+      end
+    end
 
     # Grab the next task with GET /tasks/claim?owner=...
     # Also, set the 'id' parameter of the resulting model
