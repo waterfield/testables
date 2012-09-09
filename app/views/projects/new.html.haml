@@ -1,4 +1,5 @@
 = simple_form_for project, :html => { :class => 'form-horizontal' } do |f|
+  = f.error_notification
   = f.input :name
   = f.input :repository
   = f.button :submit
