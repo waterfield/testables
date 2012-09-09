@@ -13,7 +13,8 @@ module Client
       @wait_period = opts[:wait_period] || 5
     end
 
-    # This function never terminates.
+    # This function repeatedly executes tasks until
+    # asked to stop.
     def run
       trap_signals
       until @stop
