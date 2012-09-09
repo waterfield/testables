@@ -54,12 +54,25 @@ module Client
     # `sh` returns true if all commands were successful.
     def sh *cmds
       cmds.all? do |cmd|
-        raw_output << prompt(cmd) << `#{cmd} 2>&1` << "\n"
+        raw_output << prompt(cmd) << exec(cmd) << "\n"
         $?.success?
       end
     end
 
   private
+
+    # Execute the given command in such a way that signals
+    # sent to the parent process are NOT propagated to the
+    # child process. This way, we can receive SIGINT and
+    # gracefully shut down without messing up git or RSpec
+    # or whatever.
+    def exec cmd
+      r, w = IO.pipe
+      pid = spawn cmd, pgroup: true, [:out, :err] => w
+      w.close
+      Process.wait pid
+      r.read
+    end
 
     def prompt cmd
       "worker> #{cmd}\n"
