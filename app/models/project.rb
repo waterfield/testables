@@ -6,6 +6,8 @@ class Project
 
   has_many :suites
 
+  validates_presence_of :name, :repository
+
   class << self
     def notify repository
       where(repository: repository).each &:test!

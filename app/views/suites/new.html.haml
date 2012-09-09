@@ -1,4 +1,3 @@
-= form_for [project, suite] do |f|
-  = f.label :name
-  = f.text_field :name
-  = f.submit "Create"
+= simple_form_for [project, suite], :html => { :class => 'form-horizontal' } do |f|
+  = f.input :name
+  = f.button :submit
