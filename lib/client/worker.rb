@@ -7,6 +7,8 @@ module Client
   # for a time (default 5 seconds) until asking again,
   # since we're using short polling.
   class Worker
+    include ActionView::Helpers::DateHelper
+
     def initialize(opts = {})
       @wait_period = opts[:wait_period] || 5
     end
@@ -15,12 +17,14 @@ module Client
     def run
       while true
         if task = next_task
-          task.handle
+          notify { task.handle }
         else
           sleep @wait_period
         end
       end
     end
+
+  private
 
     # Grab the next task with GET /tasks/claim?owner=...
     # Also, set the 'id' parameter of the resulting model
@@ -37,6 +41,20 @@ module Client
     # to uniquely idenfity who a task belongs to.
     def owner
       @owner ||= "worker-#{$$}"
+    end
+
+    # Time how long the task takes, and print a message
+    # when it's done.
+    def notify
+      start = Time.now
+      yield
+      finish = Time.now
+
+      time = finish.to_s :db
+      elapsed = distance_of_time_in_words start, finish
+      seconds = (finish - start).round 2
+
+      puts "#{owner} [#{time}] Completed task in #{elapsed} (#{seconds}s)"
     end
   end
 end
