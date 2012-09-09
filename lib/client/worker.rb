@@ -31,7 +31,7 @@ module Client
     # Intercept SIGINT (Ctrl-C) and attempt to shut down gracefully.
     # If the user hits Ctrl-C again, stop immediately.
     def trap_signals
-      Signal.trap 'INT' do
+      trap 'INT' do
         if @stop
           puts "Aborting!"
           Process.exit false
