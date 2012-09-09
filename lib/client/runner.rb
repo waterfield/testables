@@ -54,7 +54,7 @@ module Client
     # `sh` returns true if all commands were successful.
     def sh *cmds
       cmds.all? do |cmd|
-        raw_output << prompt(cmd) << `#{cmd}` << "\n"
+        raw_output << prompt(cmd) << `#{cmd} 2>&1` << "\n"
         $?.success?
       end
     end
