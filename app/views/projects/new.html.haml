@@ -1,6 +1,5 @@
-= form_for project do |f|
-  = f.label :name
-  = f.text_field :name
-  = f.label :repository
-  = f.text_field :repository
-  = f.submit "Create"
+= simple_form_for project, :html => { :class => 'form-horizontal' } do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :repository, :hint => "Only the <code>owner/repository</code> part of the github url is needed."
+  = f.button :submit

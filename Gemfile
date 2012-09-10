@@ -16,6 +16,7 @@ gem 'devise'
 gem 'bson_ext'
 gem 'decent_exposure'
 gem 'state_machine'
+gem 'simple_form'
 
 # Heroku doesn't like the :assets group
 # group :assets do
