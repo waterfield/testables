@@ -17,7 +17,7 @@ class Suite
   end
 
   def group_size
-    1
+    3
   end
 
   def start_tests files
@@ -28,7 +28,7 @@ class Suite
     files.in_groups_of(group_size).each do |group|
       task!({
         type: 'rspec_test',
-        files: group,
+        files: group.compact,
       },{
         test_run_id: run.id
       })

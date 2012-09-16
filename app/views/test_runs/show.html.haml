@@ -26,6 +26,17 @@
       %dt Passed
       %dd= test_run.passed
 
+    %h3 Test Results
+    - test_run.test_results.each do |result|
+      %p
+        - if result.passed?
+          .alert.alert-success
+            = result.description
+        - else
+          .alert.alert-error
+            = result.description
+          %pre= result.exception + "\n" + result.backtrace.join("\n")
+
   .span6
     %h2 Raw Output
     %pre= test_run.raw_output

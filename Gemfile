@@ -11,7 +11,7 @@ end
 gem 'rails', '3.2.3'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
-gem 'mongoid'
+gem 'mongoid', '~> 2.4.10'
 gem 'devise'
 gem 'bson_ext'
 gem 'decent_exposure'

@@ -10,12 +10,16 @@ class TestResult
 
   class << self
     def from_rspec example
+      desc = example['description'].strip
+      full = example['full_description'].strip
+      full << ' ' << desc unless full.ends_with? desc
+
       opts = {
         passed: example['status'] == 'passed',
-        description: example['full_description']
+        description: full
       }
 
-      if exc = example['expection']
+      if exc = example['exception']
         opts.merge! backtrace: exc['backtrace'],
                     exception: exc['message']
       end
