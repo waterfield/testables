@@ -8,16 +8,31 @@ class Suite
   has_many :test_runs
   has_many :tasks
 
-  def task
-    project.task.merge type: 'rspec'
+  def task!(contents, attrs={})
+    tasks.create! attrs.merge(contents: project.task.merge(contents))
   end
 
   def test!
-    tasks.create! contents: task
+    task! type: 'rspec_suite'
   end
 
-  def finish task
-    test_runs.create! task.result
+  def group_size
+    1
+  end
+
+  def start_tests files
+    run = test_runs.create!(
+      file_count: files.size,
+      files_done: 0
+    )
+    files.in_groups_of(group_size).each do |group|
+      task!({
+        type: 'rspec_test',
+        files: group,
+      },{
+        test_run_id: run.id
+      })
+    end
   end
 
 end

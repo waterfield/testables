@@ -1,5 +1,6 @@
 require 'client/runner'
-require 'client/rspec_runner'
+require 'client/rspec_suite_runner'
+require 'client/rspec_test_runner'
 require 'client/shell_runner'
 
 module Client
@@ -19,6 +20,7 @@ module Client
     # Construct a `Runner` and use its result to populate
     # the task, then submit the changes.
     def handle
+      puts "TASK: #{contents.inspect}"
       runner = Runner.build(contents)
       runner.run
       self.result = runner.result

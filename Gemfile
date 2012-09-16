@@ -16,6 +16,7 @@ gem 'devise'
 gem 'bson_ext'
 gem 'decent_exposure'
 gem 'state_machine'
+gem 'simple_form'
 
 # Heroku doesn't like the :assets group
 # group :assets do
@@ -27,9 +28,13 @@ gem 'state_machine'
 # end
 
 group local(:test) do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 2.11.0'
   gem 'mongoid-rspec'
   gem 'database_cleaner'
+
+  # This commit adds JSON formatter support, which will be
+  # available with rspec-core 2.11.2.
+  gem 'rspec-core', git: 'https://github.com/rspec/rspec-core', ref: '7e076bc82e925cf7918cced25b09d84f909bc4d5'
 end
 
 group local(:client) do
