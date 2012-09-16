@@ -27,6 +27,7 @@ class Task
   # When the task is finished, create a TestRun to
   # record the result.
   def record_result
+    return unless contents
     case contents[:type]
     when 'rspec_suite'
       suite.start_tests result[:files] if result[:files]
