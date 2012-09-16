@@ -6,7 +6,5 @@ class TestRun
   field :passed, type: Boolean
   field :raw_output, type: String
 
-  index :ran_at
-
   belongs_to :suite
 end
