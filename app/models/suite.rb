@@ -8,6 +8,8 @@ class Suite
   has_many :test_runs
   has_many :tasks
 
+  validates_presence_of :name
+
   def task!(contents, attrs={})
     tasks.create! attrs.merge(contents: project.task.merge(contents))
   end
