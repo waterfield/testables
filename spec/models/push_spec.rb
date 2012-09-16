@@ -24,7 +24,7 @@ describe Push do
       task.state.should == 'queued'
       task.contents.should == {
         'url' => 'git@github.com:owner/repo.git',
-        'type' => 'rspec'
+        'type' => 'rspec_suite'
       }
     end
   end

@@ -12,7 +12,7 @@ module Client
 
     # Include `passed` in the result.
     def result
-      super.merge passed: @passed
+      super.merge passed: @passed, output: @output
     end
 
     # Clone the repository, then call the `run_test`

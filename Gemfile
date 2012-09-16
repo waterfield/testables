@@ -11,7 +11,7 @@ end
 gem 'rails', '3.2.3'
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
-gem 'mongoid'
+gem 'mongoid', '~> 2.4.10'
 gem 'devise'
 gem 'bson_ext'
 gem 'decent_exposure'
@@ -28,9 +28,13 @@ gem 'simple_form'
 # end
 
 group local(:test) do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 2.11.0'
   gem 'mongoid-rspec'
   gem 'database_cleaner'
+
+  # This commit adds JSON formatter support, which will be
+  # available with rspec-core 2.11.2.
+  gem 'rspec-core', git: 'https://github.com/rspec/rspec-core', ref: '7e076bc82e925cf7918cced25b09d84f909bc4d5'
 end
 
 group local(:client) do
